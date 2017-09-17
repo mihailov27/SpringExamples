@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 import static org.apache.kafka.clients.admin.AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG;
 import static org.apache.kafka.clients.admin.AdminClientConfig.CLIENT_ID_CONFIG;
 
+import static com.mm.kafka_example.PropertyNames.*;
+
 @Component
 public class AdminClientComponentImpl implements AdminClientComponent {
 
@@ -38,7 +40,7 @@ public class AdminClientComponentImpl implements AdminClientComponent {
             Set<String> topicsNames = adminClient.listTopics().names().get();
             return KafkaOperationResult.success(new TopicsInfo(topicsNames));
         } catch(Exception e) {
-            String errMsg = String.format(environment.getProperty(PropertyNames.ERROR_GET_TOPICS), new Object[]{e.getMessage()});
+            String errMsg = String.format(environment.getProperty(ERROR_GET_TOPICS), new Object[]{e.getMessage()});
             logger.severe(errMsg);
             return KafkaOperationResult.error(new KafkaOperationError(errMsg, e));
         }
@@ -54,7 +56,7 @@ public class AdminClientComponentImpl implements AdminClientComponent {
             adminClient.createTopics(Arrays.asList(newTopic)).all().get();
             return KafkaOperationResult.success(new Topic(topicName));
         } catch(Exception e) {
-            String errMsg = String.format(environment.getProperty(PropertyNames.ERROR_CREATE_TOPIC), new Object[]{topicName, e.getMessage()});
+            String errMsg = String.format(environment.getProperty(ERROR_CREATE_TOPIC), new Object[]{topicName, e.getMessage()});
             logger.log(Level.SEVERE, errMsg);
             return KafkaOperationResult.error(new KafkaOperationError(errMsg));
         }
@@ -65,26 +67,26 @@ public class AdminClientComponentImpl implements AdminClientComponent {
             adminClient.deleteTopics(Arrays.asList(topicName)).all().get();
             return KafkaOperationResult.success("Topic '" + topicName + "' was deleted.");
         } catch(Exception e) {
-            String errMsg = String.format(environment.getProperty(PropertyNames.ERROR_DELETE_TOPIC), new Object[]{topicName, e.getMessage()});
+            String errMsg = String.format(environment.getProperty(ERROR_DELETE_TOPIC), new Object[]{topicName, e.getMessage()});
             logger.log(Level.SEVERE, errMsg);
             return KafkaOperationResult.error(new KafkaOperationError(errMsg,e));
         }
     }
 
-    public void openConnection() {
+    public void connect() {
         Map<String, Object> config = new HashMap<String, Object>();
         //config.put(BOOTSTRAP_SERVERS_CONFIG, Arrays.asList("127.0.0.1:9092"));
         //config.put(CLIENT_ID_CONFIG, "Client");
-        String kafkaServers = environment.getProperty(PropertyNames.KAFKA_SERVERS);
+        String kafkaServers = environment.getProperty(KAFKA_SERVERS);
         logger.info("Connecting to kafka cluster - "+kafkaServers);
         config.put(BOOTSTRAP_SERVERS_CONFIG, Arrays.asList(kafkaServers.split(",")));
-        String clientId = environment.getProperty(PropertyNames.KAFKA_CLIENT_ID);
+        String clientId = environment.getProperty(KAFKA_CLIENT_ID);
         config.put(CLIENT_ID_CONFIG, clientId);
         adminClient = KafkaAdminClient.create(config);
         isConnectionEstablished = true;
     }
 
-    public void closeConnection() {
+    public void disconnect() {
         logger.info("Closing the kafka client.");
         adminClient.close();
         isConnectionEstablished = false;
@@ -92,16 +94,5 @@ public class AdminClientComponentImpl implements AdminClientComponent {
 
     public boolean isConnectionEstablished() {
         return isConnectionEstablished;
-    }
-
-    public final class PropertyNames {
-
-        private PropertyNames() {}
-
-        public static final String KAFKA_SERVERS =          "kafka.servers";
-        public static final String KAFKA_CLIENT_ID =        "kafka.client.id";
-        public static final String ERROR_GET_TOPICS =       "kafka.error.get.topics";
-        public static final String ERROR_CREATE_TOPIC =     "kafka.error.create.topic";
-        public static final String ERROR_DELETE_TOPIC =     "kafka.error.delete.topic";
     }
 }

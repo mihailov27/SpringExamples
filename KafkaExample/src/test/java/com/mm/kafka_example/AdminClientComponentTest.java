@@ -19,14 +19,14 @@ public class AdminClientComponentTest {
     @Before
     public void setUp() {
         if(!adminClientComponent.isConnectionEstablished()) {
-            adminClientComponent.openConnection();
+            adminClientComponent.connect();
         }
     }
 
     @After
     public void tearDown() {
         if(adminClientComponent.isConnectionEstablished()) {
-            adminClientComponent.closeConnection();
+            adminClientComponent.disconnect();
         }
     }
 

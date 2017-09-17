@@ -7,10 +7,10 @@ import com.mm.kafka_example.model.TopicsInfo;
 public interface AdminClientComponent {
 
     /** Open the connection */
-    void openConnection();
+    void connect();
 
     /** Closes the connection */
-    void closeConnection();
+    void disconnect();
 
     /** Returns true, if a connection to the kafka cluster is established. */
     boolean isConnectionEstablished();

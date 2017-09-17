@@ -18,6 +18,7 @@
         <spring.version>4.3.10.RELEASE</spring.version>
         <spring.data.mongo.version>1.10.6.RELEASE</spring.data.mongo.version>
         <kafka.version>0.11.0.1</kafka.version>
+        <apache.commons.version>3.6</apache.commons.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -37,6 +38,12 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <!-- Apache commons -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.commons.version}</version>
             </dependency>
             <!-- Kafka -->
             <dependency>
