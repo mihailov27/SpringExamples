@@ -6,6 +6,7 @@ import com.mm.kafka_example.components.ProducerComponent;
 import com.mm.kafka_example.model.Message;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class ProducerConsumerTest {
         producerComponent.connect();
     }
 
+    @Ignore
     @Test
     public void test() {
         adminClientComponent.createTopic("TEST");

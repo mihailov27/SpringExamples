@@ -10,9 +10,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>MongoSpringExample</module>
+        <module>MongoDataModule</module>
         <module>KafkaExample</module>
+        <module>SpringBootModule</module>
+        <module>Movies</module>
     </modules>
+
+
 
     <properties>
         <spring.version>4.3.10.RELEASE</spring.version>
@@ -20,6 +24,9 @@
         <kafka.version>0.11.0.1</kafka.version>
         <apache.commons.version>3.6</apache.commons.version>
         <junit.version>4.12</junit.version>
+        <fasterxml.jackson.version>2.9.0</fasterxml.jackson.version>
+        <commons.io.version>2.5</commons.io.version>
+        <commons.csv.version>1.5</commons.csv.version>
     </properties>
 
     <dependencyManagement>
@@ -45,6 +52,16 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${apache.commons.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>${commons.csv.version}</version>
+            </dependency>
             <!-- Kafka -->
             <dependency>
                 <groupId>org.apache.kafka</groupId>
@@ -55,6 +72,12 @@
                 <groupId>org.apache.kafka</groupId>
                 <artifactId>kafka-examples</artifactId>
                 <version>${kafka.version}</version>
+            </dependency>
+            <!-- Json processing -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${fasterxml.jackson.version}</version>
             </dependency>
             <!-- Tests -->
             <dependency>
