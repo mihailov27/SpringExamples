@@ -13,7 +13,8 @@
         <module>MongoDataModule</module>
         <module>KafkaExample</module>
         <module>SpringBootModule</module>
-        <module>Movies</module>
+        <module>MoviesInsertToCassandra</module>
+        <module>SpringBootMoviesRestApi</module>
     </modules>
 
 

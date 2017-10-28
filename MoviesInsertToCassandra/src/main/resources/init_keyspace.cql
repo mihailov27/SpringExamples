@@ -51,3 +51,15 @@ CREATE TABLE TEST.MOVIES (
     productionCountries set<frozen <production_country>>,
     spokenLanguages set<frozen <spoken_language>>,
 );
+
+
+--- indexes
+
+create index title_index on
+test.movies(title);
+
+create index vote_index
+on test.movies(vote);
+
+
+
