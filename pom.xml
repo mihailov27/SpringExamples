@@ -15,9 +15,9 @@
         <module>SpringBootModule</module>
         <module>MoviesInsertToCassandra</module>
         <module>SpringBootMoviesRestApi</module>
+        <module>MoviesInsertToMlabMongoDatabase</module>
+        <module>CsvUtils</module>
     </modules>
-
-
 
     <properties>
         <spring.version>4.3.10.RELEASE</spring.version>

@@ -14,5 +14,5 @@ public interface MovieRepository extends CassandraRepository<Movie> {
     List<Movie> findByVote(Double vote);
 
     @Query("SELECT * FROM Movies WHERE id = ?0")
-    Movie findByExternalId(Long id)Dev;
+    Movie findByExternalId(Long id);
 }
