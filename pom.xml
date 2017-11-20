@@ -17,6 +17,7 @@
         <module>SpringBootMoviesRestApi</module>
         <module>MoviesInsertToMlabMongoDatabase</module>
         <module>CsvUtils</module>
+        <module>ReactiveJavaSamples</module>
     </modules>
 
     <properties>
